@@ -34,6 +34,7 @@ public class RegisterFragment extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -49,6 +50,7 @@ public class RegisterFragment extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password);
         buttonReg = findViewById(R.id.button2);
         textView = findViewById(R.id.LoginNow);
+        mAuth = FirebaseAuth.getInstance();
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
