@@ -43,6 +43,7 @@ public class LoginFragment extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.button4);
         textView = findViewById(R.id.RegisterNow);
+        mAuth = FirebaseAuth.getInstance();
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
