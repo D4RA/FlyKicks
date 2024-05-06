@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "cs4048 project"
 include(":app")
- 

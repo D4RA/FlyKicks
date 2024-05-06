@@ -1,4 +1,4 @@
-package com.example.cs4048project;
+package com.example.cs4048project.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.cs4048project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,7 +47,7 @@ public class LoginFragment extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),RegisterFragment.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterFragment.class);
                 startActivity(intent);
                 finish();
             }
@@ -90,6 +89,8 @@ public class LoginFragment extends AppCompatActivity {
                                 }
                             }
                         });
+
+                startActivity(new Intent(LoginFragment.this, MainActivity.class));
             }
         });
 

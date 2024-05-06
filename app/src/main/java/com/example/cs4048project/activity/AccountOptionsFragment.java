@@ -1,11 +1,10 @@
-package com.example.cs4048project;
+package com.example.cs4048project.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.cs4048project.R;
 
