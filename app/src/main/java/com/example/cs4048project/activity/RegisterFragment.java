@@ -33,7 +33,7 @@ public class RegisterFragment extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
             finish();
         }
     }
