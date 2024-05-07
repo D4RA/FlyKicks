@@ -19,15 +19,81 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/textView5"
+
+    <!-- Profile Picture -->
+
+    <!-- Change Profile Picture Button -->
+    <ImageView
+        android:id="@+id/image_profile_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="68dp"
+        android:contentDescription=""
+        android:padding="16dp"
+        android:scaleType="centerCrop"
+        android:src="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_change_profile_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Profile Page"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Save Profile Picture"
+        app:layout_constraintTop_toBottomOf="@id/image_profile_picture"
+        app:layout_constraintStart_toStartOf="@id/image_profile_picture"
+        app:layout_constraintEnd_toEndOf="@id/image_profile_picture"
+        android:layout_marginTop="8dp" />
+
+    <!-- Name EditText -->
+
+    <!-- Username EditText -->
+
+    <!-- Save Button -->
+
+    <EditText
+        android:id="@+id/edit_text_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@id/footer"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_change_profile_picture" />
+
+    <EditText
+        android:id="@+id/edit_text_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
+        android:hint="User Name"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_name" />
+
+    <Button
+        android:id="@+id/button_save_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:text="Save Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_username" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
