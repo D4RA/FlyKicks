@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.cs4048project.HeaderFooterHelper;
 import com.example.cs4048project.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +39,8 @@ public class CustomProfileActivity extends AppCompatActivity {
     private EditText editTextName;
     private EditText editTextUsername;
     private FirebaseFirestore db;
+
+    private String pictureUrl;
     FirebaseAuth mAuth;
     private static final int REQUEST_IMAGE_PICK = 1;
 
@@ -96,7 +99,6 @@ public class CustomProfileActivity extends AppCompatActivity {
             mAuth = FirebaseAuth.getInstance();
             // Create a reference to the storage location
             StorageReference imageRef = storageRef.child(mAuth.getUid());
-
             // Upload the image
             UploadTask uploadTask = imageRef.putFile(imageUri);
 
@@ -105,6 +107,12 @@ public class CustomProfileActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // Image uploaded successfully
+                    imageRef.getDownloadUrl().addOnSuccessListener(downloadUri -> {
+                        Glide.with(CustomProfileActivity.this)
+                                .load(downloadUri)
+                                .into(imageView);
+                        pictureUrl = downloadUri.toString();
+                    });
                     Log.d("Upload", "Image uploaded successfully");
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -145,6 +153,7 @@ public class CustomProfileActivity extends AppCompatActivity {
         Map<String, Object> userData = new HashMap<>();
         userData.put("name", name);
         userData.put("username", username);
+        userData.put("downloadUrl", pictureUrl);
 
         // Add the user data to Firestore database
         db.collection("users").document(currentUser)
@@ -163,35 +172,5 @@ public class CustomProfileActivity extends AppCompatActivity {
                         Toast.makeText(CustomProfileActivity.this, "Failed to save profile", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-}
-
-class User {
-    private String name;
-    private String username;
-
-    private String picUlr;
-
-
-    public User(String name, String username) {
-        this.name = name;
-        this.username = username;
-    }
-
-    // Getters and setters (optional)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }
