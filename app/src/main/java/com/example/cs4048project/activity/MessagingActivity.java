@@ -21,7 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class MessagingActivity extends AppCompatActivity {
+public class MessagingActivity extends AppCompatActivity implements UserListAdapter.OnChatClickListener {
 
     ArrayList<UserList> userlist = new ArrayList<>();
 
@@ -38,11 +38,16 @@ public class MessagingActivity extends AppCompatActivity {
         setupUserList(new UserListSetupListener() {
             @Override
             public void onUserListSetupComplete(ArrayList<UserList> userList) {
-                UserListAdapter adapter = new UserListAdapter(MessagingActivity.this, userList);
+                UserListAdapter adapter = new UserListAdapter(MessagingActivity.this, userList, MessagingActivity.this);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MessagingActivity.this));
             }
         });
+    }
+
+    @Override
+    public void onChatClick(String recipientId, String recipientName) {
+       System.out.println(recipientId + " -> " + recipientName);
     }
 
 

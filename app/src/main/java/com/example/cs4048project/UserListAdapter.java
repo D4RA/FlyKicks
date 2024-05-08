@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,9 +20,16 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
     Context context;
     ArrayList<UserList> userlist;
-    public UserListAdapter(Context context, ArrayList<UserList> userlist) {
+
+    public interface OnChatClickListener {
+        void onChatClick(String recipientId, String recipientName);
+    }
+
+    private OnChatClickListener listener;
+    public UserListAdapter(Context context, ArrayList<UserList> userlist, OnChatClickListener listener) {
         this.context = context;
         this.userlist = userlist;
+        this.listener = listener;
     }
     @Override
     public UserListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +44,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         UserList user = userlist.get(position);
 
         holder.username.setText(user.getUsername());
+
+        holder.chatButton.setOnClickListener(v -> {
+            // Handle send message button click
+            if (listener != null) {
+                listener.onChatClick(user.getUid(), user.getUsername());
+            }
+        });
 
         // Load image using Glide
         Glide.with(context)
@@ -65,5 +80,4 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
 
         }
     }
-
 }
