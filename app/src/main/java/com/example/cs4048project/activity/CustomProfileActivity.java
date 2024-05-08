@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,16 +21,13 @@ import com.example.cs4048project.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.Source;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-
-import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,12 +55,53 @@ public class CustomProfileActivity extends AppCompatActivity {
         Button buttonSaveProfile = findViewById(R.id.button_save_profile);
         ImageView imageView = findViewById(R.id.image_profile_picture);
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+
+
+        String userId = mAuth.getUid();
+
+        //This displays the users profile picture if it exists
+        if (userId != null) {
+            // Get the reference to the user's document in the Firestore collection
+            DocumentReference userRef = db.collection("users").document(userId);
+
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        // Retrieve the download URL from the document
+                        String imageUrl = documentSnapshot.getString("downloadUrl");
+
+                        Glide.with(CustomProfileActivity.this)
+                                .load(imageUrl)
+                                .centerCrop()
+                                .placeholder(R.color.white) // Placeholder color while loading (optional)
+                                .into(imageView);
+
+                        // Use the retrieved download URL
+                        Log.d("Firestore", "Download URL: " + imageUrl);
+
+
+                    } else {
+                        Log.d("Firestore", "Profile Picture not found");
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e("Firestore", "Error getting user document", e);
+                }
+            });
+        }
+
+
 
         buttonSaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println(editTextUsername);
-                mAuth = FirebaseAuth.getInstance();
+                //mAuth = FirebaseAuth.getInstance();
                 saveProfile();
             }
         });
