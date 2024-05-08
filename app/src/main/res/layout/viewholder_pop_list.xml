@@ -2,39 +2,52 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="175dp"
+    android:layout_width="wrap_content"
     android:layout_height="245dp"
     android:layout_margin="8dp"
     android:background="#DDD7D7"
     android:elevation="3dp">
 
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-
-    <View
-        android:id="@+id/view"
+    <TextView
+        android:id="@+id/pricetxt"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:text="$123"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/viewmap"
+        android:layout_width="156dp"
+        android:layout_height="49dp"
+        android:hint="Show map"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        tools:layout_editor_absoluteY="148dp" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="117dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:lines="2"
         android:maxLines="2"
@@ -42,14 +55,8 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/imageView2"
-        app:layout_constraintTop_toBottomOf="@id/imageView2"/>
-    <TextView
-        android:id="@+id/pricetxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$123"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/title"/>
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
