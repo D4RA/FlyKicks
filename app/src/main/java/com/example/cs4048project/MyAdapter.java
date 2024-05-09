@@ -1,11 +1,14 @@
 package com.example.cs4048project;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -28,9 +31,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+
         holder.titleView.setText(Items.get(position).getTitle());
-        holder.priceView.setText(Items.get(position).getPrice());
-        holder.imageView.setImageResource(Items.get(position).getPicUrl());
+        holder.priceView.setText(String.valueOf(Items.get(position).getPrice()));
+        String imageUrl = Items.get(position).getPicUrl();
+        Glide.with(context)
+                .load(imageUrl) // Load the image URL
+                .into(holder.imageView); // Set the loaded image into your ImageView
     }
 
     @Override

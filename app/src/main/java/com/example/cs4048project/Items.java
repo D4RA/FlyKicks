@@ -1,14 +1,34 @@
 package com.example.cs4048project;
 
 public class Items {
+    private String itemId;
     private String title;
-    private int  picUrl;
-    private String price;
+    private double price;
+    private String picUrl;
 
-    public Items(String title, int picUrl, String price) {
+    // Constructors, getters, and setters
+    // Ensure to have a no-argument constructor for Firestore deserialization
+
+    // No-argument constructor
+    public Items() {
+        // Required for Firestore deserialization
+    }
+
+    // Constructor with all fields
+    public Items(String itemId, String title, double price, String picUrl) {
+        this.itemId = itemId;
         this.title = title;
-        this.picUrl = picUrl;
         this.price = price;
+        this.picUrl = picUrl;
+    }
+
+    // Getters and setters
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getTitle() {
@@ -19,19 +39,19 @@ public class Items {
         this.title = title;
     }
 
-    public int getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(int picUrl) {
-        this.picUrl = picUrl;
-    }
-
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

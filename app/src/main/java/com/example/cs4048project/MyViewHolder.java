@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyViewHolder extends RecyclerView.ViewHolder{
-ImageView imageView;
-TextView priceView, titleView;
+    ImageView imageView;
+    TextView priceView, titleView;
     public MyViewHolder( View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.imageView2);

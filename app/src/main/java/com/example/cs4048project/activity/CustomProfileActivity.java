@@ -130,7 +130,7 @@ public class CustomProfileActivity extends AppCompatActivity {
             ImageView imageView = findViewById(R.id.image_profile_picture);
             imageView.setImageURI(imageUri);
 
-            // TODO: Upload the selected image to server or cloud storage
+
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference().child("pictures");
 
