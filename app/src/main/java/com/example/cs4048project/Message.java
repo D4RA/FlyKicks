@@ -1,11 +1,14 @@
 package com.example.cs4048project;
 
-public class Message {
+public class Message implements Comparable<Message> {
     private String senderId;
 
     private String recipientId;
     private String messageText;
     private long timestamp;
+
+    public Message() {
+    }
     public Message(String senderId, String recipientId, String messageText, long timestamp) {
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -43,6 +46,11 @@ public class Message {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public int compareTo(Message other) {
+        return Long.compare(this.timestamp, other.timestamp);
     }
 }
 
