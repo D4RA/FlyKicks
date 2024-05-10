@@ -16,7 +16,7 @@ public class IntroductionFragment extends AppCompatActivity {
             buttonStart = (Button) findViewById(R.id.buttonStart);
             buttonStart.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View view){
-                    startActivity(new Intent(IntroductionFragment.this, AccountOptionsFragment.class));
+                    startActivity(new Intent(IntroductionFragment.this, AccountOptionsActivity.class));
                 }
             });
         }
