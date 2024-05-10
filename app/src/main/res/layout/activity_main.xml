@@ -8,29 +8,31 @@
 
     <include
         android:id="@+id/header"
-        layout="@layout/header" />
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="542dp"
+        android:layout_height="match_parent"
         android:layout_below="@id/header"
-        android:layout_marginTop="-2dp"
-        android:layout_marginBottom="0dp" />
-
-    <TextView
-        android:id="@+id/user_name_text_view"
-        android:layout_width="10dp"
-        android:layout_height="10dp">
-    </TextView>
+        android:layout_above="@id/footer" />
 
     <Button
         android:id="@+id/button_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Post"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="75dp" />
+
+    <include
+        android:id="@+id/footer"
+        layout="@layout/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

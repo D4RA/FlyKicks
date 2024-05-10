@@ -62,6 +62,7 @@ import data.Users;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_main);
          setTitle("Shop");
+         HeaderFooterHelper.setupHeaderButtons(this);
 
          recyclerView = findViewById(R.id.recyclerview);
          recyclerView.setLayoutManager(new LinearLayoutManager(this));
