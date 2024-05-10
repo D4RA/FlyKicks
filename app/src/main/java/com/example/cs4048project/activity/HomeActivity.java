@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.cs4048project.HeaderFooterHelper;
 import com.example.cs4048project.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -62,9 +63,11 @@ public class HomeActivity extends AppCompatActivity {
         CardView logout = findViewById(R.id.cardLogOut);
 
         logout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, LoginFragment.class));
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(HomeActivity.this, AccountOptionsFragment.class));
             }
         });
 
