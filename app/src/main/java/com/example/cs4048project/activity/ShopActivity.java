@@ -192,7 +192,7 @@ public class ShopActivity extends AppCompatActivity {
                         String title = documentSnapshot.getString("name");
                         // Retrieve price as a number instead of string
                         Double price = documentSnapshot.getDouble("price");
-                        String picUrl = documentSnapshot.getString("picUrl");
+                        String picUrl = documentSnapshot.getString("downloadUrl");
                         String postUsername = documentSnapshot.getString("username");
                         Items item = new Items(itemId, title, price, picUrl, postUsername);
                         itemList.add(item);
