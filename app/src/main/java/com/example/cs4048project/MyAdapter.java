@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
         holder.titleView.setText(Items.get(position).getTitle());
-        holder.priceView.setText(String.valueOf(Items.get(position).getPrice()));
+        holder.priceView.setText("€" + String.valueOf(Items.get(position).getPrice()));
         holder.usernameView.setText(Items.get(position).getUsername());
         String imageUrl = Items.get(position).getPicUrl();
         Glide.with(context)
