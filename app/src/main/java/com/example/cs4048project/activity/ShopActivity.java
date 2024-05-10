@@ -61,6 +61,7 @@ public class ShopActivity extends AppCompatActivity {
     EditText itemPriceEditText;
     ImageView uploadedPictureImageView;
     private Uri selectedImageUri;
+    private String picUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +153,7 @@ public class ShopActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             // Use the download URL (uri) of the image
-                                            String imageUrl = uri.toString();
+                                            picUrl = uri.toString();
                                             upload();
                                         }
                                     });
@@ -228,7 +229,7 @@ public class ShopActivity extends AppCompatActivity {
         Map<String, Object> itemData = new HashMap<>();
         itemData.put("name", name);
         itemData.put("price", price);
-        itemData.put("downloadUrl", selectedImageUri);
+        itemData.put("downloadUrl", picUrl);
         itemData.put("username", username);
 
         // Add the user data to Firestore database
