@@ -100,7 +100,7 @@ public class ShopActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document != null && document.exists()) {
-                                String username = document.getString("username");
+                                username = document.getString("username");
                             } else {
                                 Log.d("Firestore", "User document does not exist");
                             }
@@ -192,7 +192,8 @@ public class ShopActivity extends AppCompatActivity {
                         // Retrieve price as a number instead of string
                         Double price = documentSnapshot.getDouble("price");
                         String picUrl = documentSnapshot.getString("picUrl");
-                        Items item = new Items(itemId, title, price, picUrl);
+                        String postUsername = documentSnapshot.getString("username");
+                        Items item = new Items(itemId, title, price, picUrl, postUsername);
                         itemList.add(item);
                     }
                     MyAdapter myAdapter = new MyAdapter(getApplicationContext(), itemList);
@@ -228,6 +229,7 @@ public class ShopActivity extends AppCompatActivity {
         itemData.put("name", name);
         itemData.put("price", price);
         itemData.put("downloadUrl", selectedImageUri);
+        itemData.put("username", username);
 
         // Add the user data to Firestore database
         db.collection("items").document(userUid)
