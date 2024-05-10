@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "941964676540",
+    "firebase_url": "https://cs4048-project-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "cs4048-project",
     "storage_bucket": "cs4048-project.appspot.com"
   },
