@@ -1,98 +1,79 @@
 package com.example.cs4048project.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.cs4048project.R;
+import com.example.cs4048project.activity.HomeActivity;
+import com.example.cs4048project.activity.RegisterFragment;
+import com.example.cs4048project.activity.ShopActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginFragment extends AppCompatActivity {
-    EditText editTextEmail, editTextPassword;
-    Button buttonLogin;
-    FirebaseAuth mAuth;
-    TextView textView;
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
-            finish();
-        }
-    }
+public class LoginFragment extends Fragment {
+
+    private EditText editTextEmail, editTextPassword;
+    private Button buttonLogin;
+    private FirebaseAuth mAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_login);
-        editTextEmail = findViewById(R.id.Email);
-        editTextPassword = findViewById(R.id.password);
-        buttonLogin = findViewById(R.id.button4);
-        textView = findViewById(R.id.RegisterNow);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        editTextEmail = view.findViewById(R.id.editTextEmail);
+        editTextPassword = view.findViewById(R.id.editTextPassword);
+        buttonLogin = view.findViewById(R.id.loginButton);
+
         mAuth = FirebaseAuth.getInstance();
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterFragment.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email,password;
-                email= String.valueOf(editTextEmail.getText());
-                password = String.valueOf(editTextPassword.getText());
-                mAuth = FirebaseAuth.getInstance();
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)){
-                    Toast.makeText(LoginFragment.this, "Enter email", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(getActivity(), "Please enter email and password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (TextUtils.isEmpty(password)){
-                    Toast.makeText(LoginFragment.this, "Enter password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+                // Sign in with email and password
                 mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(getApplicationContext(), "Login successful",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                    finish();
+                                    // Sign in successesful so toaster appears and page navigates
+                                    Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getActivity(), CustomProfileActivity.class));
+                                    getActivity().finish();
                                 } else {
-
-                                    Toast.makeText(LoginFragment.this, "Authentication failed.",
+                                    // Sign in unsuccessful
+                                    Toast.makeText(getActivity(), "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-
                                 }
                             }
                         });
-
-                startActivity(new Intent(LoginFragment.this, ShopActivity.class));
             }
         });
 
+        return view;
     }
 }
