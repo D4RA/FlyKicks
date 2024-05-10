@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Cs4048Project"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AccountOptionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CustomProfileActivity"
             android:exported="false" />
         <activity
@@ -45,13 +48,10 @@
         </activity>
         <activity
             android:name=".activity.LoginFragment"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".activity.AccountOptionsFragment"
-            android:label="@string/app_name" />
+            android:launchMode="standard" />
         <activity
             android:name=".activity.RegisterFragment"
-            android:label="@string/app_name" />
+            android:launchMode="standard" />
         <activity
             android:name=".activity.ShopActivity"
             android:label="@string/app_name" />
