@@ -1,11 +1,14 @@
 package com.example.cs4048project;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -28,9 +31,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.titleView.setText(Items.get(position).getTitle());
-        holder.priceView.setText(Items.get(position).getPrice());
-        holder.imageView.setImageResource(Items.get(position).getPicUrl());
+
+
+        holder.titleView.setText("Item Title: " + Items.get(position).getTitle());
+        holder.priceView.setText("€" + String.valueOf(Items.get(position).getPrice()));
+        holder.usernameView.setText("Username: " + Items.get(position).getUsername());
+        holder.countyView.setText("Co. " + Items.get(position).getCounty());
+        String imageUrl = Items.get(position).getPicUrl();
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.baseline_attach_money_24)
+                .error(R.drawable.baseline_attach_money_24)
+                .into(holder.imageView);
     }
 
     @Override

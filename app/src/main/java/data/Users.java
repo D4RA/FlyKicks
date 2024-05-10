@@ -1,17 +1,27 @@
 package data;
 
 public final class Users {
-    String firstName = "";
-    String lastName = "";
+    String name = "";
+    String username = "";
+    String downloadUrl = "";
 
-    String email = "";
+    String[] posts;
 
-    String imagepath = "";
+     public void user(String name, String username, String downloadUrl){
+         this.name= name;
+         this.username = username;
+         this.downloadUrl = downloadUrl;
+     }
 
-     public void user(String firstName, String lastName, String email, String imagepath){
-         this.firstName= firstName;
-         this.lastName = lastName;
-         this.email = email;
-         this.imagepath= imagepath;
+     public String getName(){
+         return name;
+     }
+
+     public String getPrice(){
+         return "1";
+     }
+
+     public String getImageUrl(){
+         return downloadUrl;
      }
 }
