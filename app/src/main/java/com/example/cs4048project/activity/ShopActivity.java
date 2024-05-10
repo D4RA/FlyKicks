@@ -82,6 +82,11 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
 
+        Button refresh = findViewById(R.id.button_refresh);
+        refresh.setOnClickListener(view -> {
+            fetchUsersFromFirebase();
+        });
+
         //recyclerView.setAdapter(userAdapter);
 
         db = FirebaseFirestore.getInstance();
@@ -233,7 +238,7 @@ public class ShopActivity extends AppCompatActivity {
         itemData.put("username", username);
 
         // Add the user data to Firestore database
-        db.collection("items").document(userUid)
+        db.collection("items").document()
                 .set(itemData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
