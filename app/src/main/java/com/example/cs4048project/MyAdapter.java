@@ -38,8 +38,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.usernameView.setText(Items.get(position).getUsername());
         String imageUrl = Items.get(position).getPicUrl();
         Glide.with(context)
-                .load(imageUrl) // Load the image URL
-                .into(holder.imageView); // Set the loaded image into your ImageView
+                .load(imageUrl)
+                .placeholder(R.drawable.baseline_attach_money_24)
+                .error(R.drawable.baseline_attach_money_24)
+                .into(holder.imageView);
     }
 
     @Override
