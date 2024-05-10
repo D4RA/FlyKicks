@@ -192,6 +192,7 @@ public class CustomProfileActivity extends AppCompatActivity {
         userData.put("name", name);
         userData.put("username", username);
         userData.put("downloadUrl", pictureUrl);
+        userData.put("id", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         // Add the user data to Firestore database
         db.collection("users").document(currentUser)
