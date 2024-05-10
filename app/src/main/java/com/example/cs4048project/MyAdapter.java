@@ -33,9 +33,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
 
-        holder.titleView.setText(Items.get(position).getTitle());
+        holder.titleView.setText("Item Title: " + Items.get(position).getTitle());
         holder.priceView.setText("€" + String.valueOf(Items.get(position).getPrice()));
-        holder.usernameView.setText(Items.get(position).getUsername());
+        holder.usernameView.setText("Username: " + Items.get(position).getUsername());
+        holder.countyView.setText("Co. " + Items.get(position).getCounty());
         String imageUrl = Items.get(position).getPicUrl();
         Glide.with(context)
                 .load(imageUrl)

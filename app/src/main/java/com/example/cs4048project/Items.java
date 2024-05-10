@@ -8,6 +8,8 @@ public class Items {
 
     private String username;
 
+    private String county;
+
     // Constructors, getters, and setters
     // Ensure to have a no-argument constructor for Firestore deserialization
 
@@ -17,12 +19,21 @@ public class Items {
     }
 
     // Constructor with all fields
-    public Items(String itemId, String title, double price, String picUrl, String username) {
+    public Items(String itemId, String title, double price, String picUrl, String username, String county) {
         this.itemId = itemId;
         this.title = title;
         this.price = price;
         this.picUrl = picUrl;
         this.username = username;
+        this.county = county;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 
     public String getUsername() {

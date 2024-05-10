@@ -18,9 +18,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cs4048project.HeaderFooterHelper;
@@ -42,6 +45,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +63,15 @@ public class ShopActivity extends AppCompatActivity {
 
     EditText itemNameEditText;
     EditText itemPriceEditText;
+    Spinner postCounty;
+    String countyName;
     ImageView uploadedPictureImageView;
     private Uri selectedImageUri;
     private String picUrl;
+    private String selectedItem = "All";
+    ArrayList<String> locationArray = new ArrayList<>();
+    ArrayList<String> modalLocationArray = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,7 @@ public class ShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Shop");
         HeaderFooterHelper.setupHeaderButtons(this);
+        populateCountryArray();
 
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,6 +103,24 @@ public class ShopActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         fetchUserFromFirebase();
         fetchUsersFromFirebase();
+
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedItem = parentView.getItemAtPosition(position).toString();
+                System.out.println(selectedItem);
+                fetchUsersFromFirebase();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
     }
 
     private void fetchUserFromFirebase() {
@@ -130,6 +159,21 @@ public class ShopActivity extends AppCompatActivity {
         Button uploadPictureButton = modalView.findViewById(R.id.button_upload_picture);
         Button save = modalView.findViewById(R.id.button_save);
         uploadedPictureImageView = modalView.findViewById(R.id.image_view_uploaded_picture);
+        postCounty = modalView.findViewById(R.id.spinner_county);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, modalLocationArray);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        postCounty.setAdapter(adapter2);
+        postCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                countyName = parentView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
 
         // Set click listener for the uploadButton
         uploadPictureButton.setOnClickListener(new View.OnClickListener() {
@@ -199,8 +243,18 @@ public class ShopActivity extends AppCompatActivity {
                         Double price = documentSnapshot.getDouble("price");
                         String picUrl = documentSnapshot.getString("downloadUrl");
                         String postUsername = documentSnapshot.getString("username");
-                        Items item = new Items(itemId, title, price, picUrl, postUsername);
+                        String countyName = documentSnapshot.getString("county");
+                        Items item = new Items(itemId, title, price, picUrl, postUsername, countyName);
                         itemList.add(item);
+                    }
+                    if (!selectedItem.equals("All")) {
+                        List<Items> filteredList = new ArrayList<>();
+                        for (Items item : itemList) {
+                            if (item.getCounty().equals(selectedItem)) {
+                                filteredList.add(item);
+                            }
+                        }
+                        itemList = filteredList;
                     }
                     MyAdapter myAdapter = new MyAdapter(getApplicationContext(), itemList);
                     recyclerView.setAdapter(myAdapter);
@@ -236,6 +290,7 @@ public class ShopActivity extends AppCompatActivity {
         itemData.put("price", price);
         itemData.put("downloadUrl", picUrl);
         itemData.put("username", username);
+        itemData.put("county", countyName);
 
         // Add the user data to Firestore database
         db.collection("items").document()
@@ -257,4 +312,25 @@ public class ShopActivity extends AppCompatActivity {
 
 
     }
+
+    private void populateCountryArray() {
+        String[] countyArray = {
+                "All", "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Dublin",
+                "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim",
+                "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan",
+                "Offaly", "Roscommon", "Sligo", "Tipperary", "Waterford",
+                "Westmeath", "Wexford", "Wicklow"
+        };
+        String[] countyArray2 = {
+                "Carlow", "Cavan", "Clare", "Cork", "Donegal", "Dublin",
+                "Galway", "Kerry", "Kildare", "Kilkenny", "Laois", "Leitrim",
+                "Limerick", "Longford", "Louth", "Mayo", "Meath", "Monaghan",
+                "Offaly", "Roscommon", "Sligo", "Tipperary", "Waterford",
+                "Westmeath", "Wexford", "Wicklow"
+        };
+        locationArray = new ArrayList<>(Arrays.asList(countyArray));
+        modalLocationArray = new ArrayList<>(Arrays.asList(countyArray2));
+
+    }
+
 }

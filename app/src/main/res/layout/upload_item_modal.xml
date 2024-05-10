@@ -28,24 +28,37 @@
         android:hint="Price"
         android:minHeight="48dp" />
 
+    <!-- Spinner to select county -->
+    <Spinner
+        android:id="@+id/spinner_county"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_item_price"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Button to upload picture -->
     <Button
         android:id="@+id/button_upload_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_item_price"
+        android:layout_below="@id/spinner_county"
         android:layout_centerHorizontal="true"
         android:text="Upload Picture"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
+    <!-- uploaded picture (hidden by default) -->
     <ImageView
         android:id="@+id/image_view_uploaded_picture"
         android:layout_width="1dp"
         android:layout_height="1dp"
-        android:layout_below="@id/edit_text_item_price"
+        android:layout_below="@id/spinner_county"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
+    <!-- Button to create post -->
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
@@ -53,12 +66,6 @@
         android:layout_below="@id/button_upload_picture"
         android:layout_centerHorizontal="true"
         android:text="Create Post"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Placeholder for uploaded picture -->
-
-
-    <!-- Button to upload picture -->
-
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>
