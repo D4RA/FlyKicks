@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_upload_picture"
         android:layout_centerHorizontal="true"
-        android:text="Save"
+        android:text="Create Post"
         android:layout_marginTop="16dp"/>
 
     <!-- Placeholder for uploaded picture -->

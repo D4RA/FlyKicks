@@ -239,14 +239,14 @@ public class ShopActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("Firestore", "DocumentSnapshot added with ID: " + currentUser);
-                        Toast.makeText(ShopActivity.this, "Profile saved successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopActivity.this, "Post created successfully", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e("Firestore", "Error adding document", e);
-                        Toast.makeText(ShopActivity.this, "Failed to save profile", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopActivity.this, "Failed to save post", Toast.LENGTH_SHORT).show();
                     }
                 });
 
